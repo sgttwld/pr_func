@@ -14,12 +14,12 @@ px_yz = np.einsum('ijk,ij,jk->ijk', pz_xy, pxy, 1.0/np.einsum('ijk,ij->jk',pz_xy
 
 And here is the __pr_func variant__:
 ```python
-pr.set_dims([('x',10),('y',15),('z',20)])   # setting up the dimensions
-pxy = pr.func(vars=['x','y'], val='unif').normalize()
-pz_xy = pr.func(vars=['x','y','z'], val='unif').normalize(['z'])
-px_yz = pz_xy*pxy/pr.sum(pz_xy*pxy,['x'])
+pr.set_dims([('x',10),('y',15),('z',20)])              # setting up the dimensions
+pxy = pr.func(vars=['x','y'], val='unif').normalize()  # defining an instance of `func` depending on x and y
+pz_xy = pr.func(vars=['x','y','z'], val='unif').normalize(['z'])    # ... depending on x,y,z, and normalizing 
+px_yz = pz_xy*pxy/pr.sum(pz_xy*pxy,['x'])              # simple multiplication and summing with respect to x
 ```
-As we can see, the setup requires to define the dimensions, but then the distributions can be multiplied like numbers, since they are instances of the `pr_func` class knowing which dimensions correspond to each other. Note that, since we implemented a `normalize()` function, the last row of the `pr_func` variant could have been even simpler:
+As we can see, the setup requires to define the dimensions, but then the distributions can be multiplied like numbers, since they are instances of the `pr_func` class knowing which dimensions correspond to each other. Note that, since we implemented a `normalize()` method, the last row of the `pr_func` variant could have been even simpler:
 ```python
 px_yz = (pz_xy*pxy).normalize(['x'])
 ```
