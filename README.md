@@ -30,26 +30,33 @@ px_yz = (pz_xy*pxy).normalize(['x'])
 ## Overview
 
 ### Setup
-```
-pr.set_dims([('x',10),('y',15),('z',5)])              # setting up the dimensions
+```python
+pr.set_dims([('x',10),('y',15),('z',5)])         # setting up the dimensions
 ```
 
-### Defining instances of `func`
-```
-F = pr.func('f(x,y)', val='rnd')
-G = pr.func('f(z)', val=np.array([1,1,2,3,5]))
-H = pr.func(vars=['x','z'], val='unif')
+### Defining instances
+```python
+F = pr.func('f(x,y)', val='rnd')                 # an instance depending on x and y with random values
+G = pr.func('f(z)', val=np.array([1,1,2,3,5]))   # an instance depending on z with given values
+H = 5*pr.func(vars=['x','z'], val='unif')        # an instance depending on x and z with the same value for each entry
 ```
 
 ### Basic calculus
-```
-F*G, F/G, 2*H, F+H, G-F, ...
+```python
+F*G, F/G, 2*H, F+H, G-F, ...                     
 ```
 
 ### Summation and normalization
+```python
+pr.sum(F)                                        # summation over all variables of F
+pr.sum(G*H,['z'])                                # summation over z
+F.normalize()                                    # normalization with respect to all variables
+(F+G).normalize(['y','z'])                       # normalization with respect to y and z
 ```
-pr.sum(F)
-pr.sum(G*H,['z'])
-F.normalize()
-(F+G).normalize(['y','z'])
+
+### Instance properties
+```python
+F.val                                            # numpy array, here: F.val = np.random.rand(10,15)
+F.vars                                           # list of the variables, here: F.vars = ['x','y']
+F.r                                              # list of positions of the variables in dims, here: F.r = [0,1]
 ```
