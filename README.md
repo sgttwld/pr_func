@@ -27,6 +27,10 @@ As we can see, the setup requires to define the dimensions, but then the distrib
 px_yz = (pz_xy*pxy).normalize(['x'])
 ```
 
+
+Examples of how to use `pr_func` for efficiently implementing Blahut-Arimoto type algorithms can be found [here](https://github.com/sgttwld/blahut-arimoto).
+
+
 ## Overview
 
 ### Setup
@@ -60,5 +64,3 @@ F.val                                       # numpy array, he
 F.vars                                      # list of the variables, here: F.vars = ['x','y']
 F.r                                         # positions of the vars in dims, here: F.r = [0,1]
 ```
-
-Examples of how to use `pr_func` for efficiently implementing Blahut-Arimoto type algorithms can be found [here](https://github.com/sgttwld/blahut-arimoto).
