@@ -58,5 +58,5 @@ F.normalize()                               # normalization with respect to all 
 ```python
 F.val                                       # numpy array, here: F.val = np.random.rand(10,15)
 F.vars                                      # list of the variables, here: F.vars = ['x','y']
-F.r                                         # list of positions of the variables in dims, here: F.r = [0,1]
+F.r                                         # positions of the vars in dims, here: F.r = [0,1]
 ```
