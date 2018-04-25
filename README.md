@@ -6,9 +6,9 @@ Here is an example of how to calculate the conditional probability `p(x|y,z)` fr
 
 The __numpy variant__ using the powerful `einsum` method would be:
 ```python
-X,Y,Z = 10,15,20                            # fixing the possible number of values for each of the random variables
-pxy = np.ones((X,Y))/(X*Y)                  # uniform distributions for simplicty                  
-pz_xy = np.ones((X,Y,Z))/Z                  # normalizing a non-uniform distribution would require another sum/einsum
+X,Y,Z = 10,15,20             # fixing the possible number of values for each of the random variables
+pxy = np.ones((X,Y))/(X*Y)   # uniform distributions for simplicty                  
+pz_xy = np.ones((X,Y,Z))/Z   # normalizing a non-uniform distribution would require another sum/einsum
 px_yz = np.einsum('ijk,ij,jk->ijk', pz_xy, pxy, 1.0/np.einsum('ijk,ij->jk',pz_xy, pxy)  
 ```
 
