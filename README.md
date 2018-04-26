@@ -35,6 +35,7 @@ Examples of how to use `pr_func` for efficiently implementing Blahut-Arimoto typ
 
 ### Setup
 ```python
+import pr_func as pr
 pr.set_dims([('x',10),('y',15),('z',5)])    # setting up the dimensions
 ```
 
