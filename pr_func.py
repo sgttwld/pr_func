@@ -2,7 +2,7 @@
 # pr_func.py
 # implementation of a 'function' container class containing a numpy
 # array and knowledge about its dependent variables.
-# Sebastian Gottwald <sebastian.gottwald@uni-ulm.de> 2018
+# 2018 Sebastian Gottwald <sebastian.gottwald@uni-ulm.de>
 
 import numpy as np
 
