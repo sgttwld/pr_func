@@ -54,7 +54,8 @@ F*G, F/G, 2*H, F+H, 1+G-F, ...              # results of basic operations are al
 ### Summation and normalization
 ```python
 pr.sum(F)                                   # summation over all variables of F
-pr.sum(G*H,['z'])                           # summation over z
+pr.sum(['z'],G*H)                           # summation over z
+pr.sum(F+H,['z'])                           # summation over all variables of F+H except z 
 F.normalize()                               # normalization with respect to all variables
 (F+G).normalize(['y','z'])                  # normalization with respect to y and z
 ```
