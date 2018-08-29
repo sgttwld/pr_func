@@ -5,7 +5,7 @@ It was developed to simplify calculus with multi-dimensional tensors/matrices. F
 
 ## Simple example
 
-Here is an example of how to calculate the conditional probability `p(x|y,z)` from given distributions `p(z|x,y)` and `p(x,y)`, i.e. `p(x|y,z) = p(z|x,y)*p(x,y)/p(y,z)`, where `p(y,z) = sum_x p(z|x,y)*p(x,y)`. 
+Here is an example of how to calculate the conditional probability `p(x|y,z)` from given distributions `p(z|x,y)` and `p(x,y)`, i.e. `p(x|y,z) = p(z|x,y)*p(x,y)/p(y,z)`, where `p(y,z) = sum_x p(z|x,y)*p(x,y)`.
 
 The __numpy variant__ using the powerful `einsum` method would be:
 ```python
@@ -19,7 +19,7 @@ And here is the __pr_func variant__:
 ```python
 pr.set_dims([('x',10),('y',15),('z',20)])              # setting up the dimensions
 pxy = pr.func(vars=['x','y'], val='unif').normalize()  # an instance of `func` depending on x and y
-pz_xy = pr.func(vars=['x','y','z'], val='unif').normalize(['z'])    # ... on x,y,z, and normalizing 
+pz_xy = pr.func(vars=['x','y','z'], val='unif').normalize(['z'])    # ... on x,y,z, and normalizing
 px_yz = pz_xy*pxy/pr.sum(pz_xy*pxy,['x'])              # simple multiplication, division, and sums
 ```
 As we can see, the setup requires to define the dimensions, but then the distributions can be multiplied like numbers, since they are instances of the `pr_func` class knowing which dimensions correspond to each other. Note that, since we implemented a `normalize()` method, the last row of the `pr_func` variant could have been even simpler:
@@ -55,7 +55,7 @@ F*G, F/G, 2*H, F+H, 1+G-F, ...              # results of basic operations are al
 ```python
 pr.sum(F)                                   # summation over all variables of F
 pr.sum(['z'],G*H)                           # summation over z
-pr.sum(F+H,['z'])                           # summation over all variables of F+H except z 
+pr.sum(F+H,['z'])                           # summation over all variables of F+H except z
 F.normalize()                               # normalization with respect to all variables
 (F+G).normalize(['y','z'])                  # normalization with respect to y and z
 ```
@@ -65,4 +65,9 @@ F.normalize()                               # normalization with respect to all 
 F.val                                       # numpy array, here: F.val = np.random.rand(10,15)
 F.vars                                      # list of the variables, here: F.vars = ['x','y']
 F.r                                         # positions of the vars in dims, here: F.r = [0,1]
+```
+
+### Evaluation/Slicing
+```python
+f = F.eval('x',4)                         # f(y) = F(x=4,y)
 ```
